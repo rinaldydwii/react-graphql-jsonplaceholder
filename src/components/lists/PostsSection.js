@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 // import { Link } from "react-router-dom"
 import PostItem from "../items/PostItem";
 import Loading from "../Loading";
-// import ReadMoreButton from "../ReadMoreButton";
+import ReadMoreButton from "../ReadMoreButton";
 
 const GET_POSTS = gql`
     query {
@@ -15,7 +15,7 @@ const GET_POSTS = gql`
     }
 `;
 
-const PostsSection = () => (
+const PostsSection = ({paginate = false}) => (
     <section>
         <h2 className="text-center">Posts</h2>
         {/* { addButton ? 
@@ -36,8 +36,12 @@ const PostsSection = () => (
                             </div>
                         ) : <div>Empty post!</div>
                         }
-                        {/* { paginateToPage ? <ReadMoreButton to="/posts" /> : "" }
-                        { paginate ? <ReadMoreButton onClick={onLoadPosts} /> : ""} */}
+                        { paginate ? 
+                            typeof paginate.to !== "undefined" ?
+                                <ReadMoreButton to={paginate.to} /> :
+                                <ReadMoreButton onClick={paginate.onClick} />
+                            : ""
+                        }
                     </Loading>
                 )
             }

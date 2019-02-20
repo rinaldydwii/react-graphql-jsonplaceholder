@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Loading from "../Loading";
 import UserItem from "../items/UserItem";
-// import ReadMoreButton from "../ReadMoreButton";
+import ReadMoreButton from "../ReadMoreButton";
 
 const GET_USERS = gql`
     query {
@@ -15,7 +15,7 @@ const GET_USERS = gql`
     }
 `;
 
-const UsersSection = () => (
+const UsersSection = ({paginate = false}) => (
     <section>
         <h2 className="text-center">Users</h2>
         <Query query={GET_USERS}>
@@ -30,8 +30,12 @@ const UsersSection = () => (
                             </div>
                         ) : <div>Empty user!</div>
                         }
-                        {/* { paginateToPage ? <ReadMoreButton to="/users" > : "" }
-                        { paginate ? <ReadMoreButton onClick={onLoadUsers} /> : ""} */}
+                        { paginate ? 
+                            typeof paginate.to !== "undefined" ?
+                                <ReadMoreButton to={paginate.to} /> :
+                                <ReadMoreButton onClick={paginate.onClick} />
+                            : ""
+                        }
                     </Loading>
                 )
             }

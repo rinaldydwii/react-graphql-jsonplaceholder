@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import PhotoItem from "../items/PhotoItem";
 import Loading from "../Loading";
-// import ReadMoreButton from "../ReadMoreButton";
+import ReadMoreButton from "../ReadMoreButton";
 
 const GET_PHOTOS = gql`
     query {
@@ -15,23 +15,27 @@ const GET_PHOTOS = gql`
     }
 `;
 
-const PhotosSection = () => (
+const PhotosSection = ({paginate = false}) => (
     <section>
         <h2 className="text-center">Photos</h2>
         <Query query={GET_PHOTOS}>
             { ({loading, error, data: {photos}}) => (
-                <Loading loading={loading} error={error}>
-                    { photos ? (
-                        <div className="grid grid-4">
-                            { photos.map(photo => (
-                                <PhotoItem photo={photo} key={photo.id} />
-                            )) }
-                        </div>
-                    ) : <div>Photos not found!</div>
-                    }
-                    {/* { paginateToPage ? <ReadMoreButton to="/photos" /> : "" }
-                    { paginate ? <ReadMoreButton onClick={onLoadPhotos} /> : ""} */}
-                </Loading>
+                    <Loading loading={loading} error={error}>
+                        { photos ? (
+                            <div className="grid grid-4">
+                                { photos.map(photo => (
+                                    <PhotoItem photo={photo} key={photo.id} />
+                                )) }
+                            </div>
+                        ) : <div>Photos not found!</div>
+                        }
+                        { paginate ? 
+                            typeof paginate.to !== "undefined" ?
+                                <ReadMoreButton to={paginate.to} /> :
+                                <ReadMoreButton onClick={paginate.onClick} />
+                            : ""
+                        }
+                    </Loading>
                 )
             }
         </Query>
