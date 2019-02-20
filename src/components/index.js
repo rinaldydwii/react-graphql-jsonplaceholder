@@ -2,7 +2,7 @@ import Container from './Container'
 import Loading from './Loading'
 import Navbar from './Navbar'
 import Footer from './Footer'
-// import ProfileSection from './user/ProfileSection'
+import ProfileSection from './user/ProfileSection'
 import UsersSection from './lists/UsersSection'
 import PostsSection from './lists/PostsSection'
 import CommentsSection from './lists/CommentsSection'
@@ -14,7 +14,7 @@ export {
     Loading,
     Navbar,
     Footer,
-    // ProfileSection,
+    ProfileSection,
     UsersSection,
     PostsSection,
     CommentsSection,
