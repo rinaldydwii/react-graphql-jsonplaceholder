@@ -57,8 +57,8 @@ class UserView extends Component {
                                                             </div>
                                                         </header>
                                                         <ProfileSection user={user} />
-                                                        {/* <PostsSection />
-                                                        <AlbumsSection /> */}
+                                                        <PostsSection id={id} paginate={{to: "/posts"}} />
+                                                        <AlbumsSection id={id} paginate={{to: "/albums"}} />
                                                     </React.Fragment>
                                                 )
                                                 : <p>User not found!</p>

@@ -73,6 +73,7 @@ class PostView extends Component {
                                                                 <p>{post.body}</p>
                                                             </Container>
                                                         </article>
+                                                        <CommentsSection id={id} />
                                                     </div>
                                                 ) : ""
                                             }
@@ -89,14 +90,7 @@ class PostView extends Component {
     }
 }
 
-{/* <CommentsSection
-                                                        comments={this.props.comments} 
-                                                        loading={this.props.loadingComments}
-                                                        finish={this.props.finishComments}
-                                                        error={this.props.errorComments}
-                                                        onSubmitComment={this.createComment}
-                                                        postId={post.id}
-                                                    /> */}
+
 
 // const mapStateToProps = state => ({
 //     post: state.postReducer.post,

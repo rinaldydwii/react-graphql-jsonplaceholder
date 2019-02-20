@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-// import { connect } from 'react-redux';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Container, PhotosSection, Loading } from "../components";
-// import { fetchAlbum } from "../actions/albumActions";
-// import { fetchPhotosByAlbumId } from "../actions/photoActions";
 
 const GET_ALBUM = gql`
     query album($id: ID!) {
@@ -16,11 +13,6 @@ const GET_ALBUM = gql`
 `;
 
 class AlbumView extends Component {
-    // componentDidMount() {
-    //     const albumId = this.props.match.params.id
-    //     this.props.getAlbum(albumId)
-    //     this.props.getPhotos(albumId)
-    // }
     constructor() {
         super()
         this.state = {
@@ -43,7 +35,10 @@ class AlbumView extends Component {
                                 return (
                                     <Loading loading={loading} error={error} >
                                         { album ? (
-                                                <h1 className="text-center">{album.title}</h1>
+                                                <React.Fragment>
+                                                    <h1 className="text-center">{album.title}</h1>
+                                                    <PhotosSection id={id} paginate={{to: "/photos"}} />
+                                                </React.Fragment>
                                             ) : ""
                                         }
                                     </Loading>
@@ -57,26 +52,4 @@ class AlbumView extends Component {
     }
 }
 
- {/* <PhotosSection
-                                                    photos={this.props.photos} 
-                                                    loading={this.props.loadingPhotos}
-                                                    finish={this.props.finishPhotos}
-                                                    error={this.props.errorPhotos}
-                                                /> */}
-
-// const mapStateToProps = state => ({
-//     album: state.albumReducer.album,
-//     loadingAlbum: state.albumReducer.loading,
-//     finishAlbum: state.albumReducer.finish,
-//     errorAlbum: state.albumReducer.error,
-//     photos: state.photosReducer.photos,
-//     loadingPhotos: state.photosReducer.loading,
-//     finishPhotos: state.photosReducer.finish,
-//     errorPhotos: state.photosReducer.error,
-// })
-  
-// const mapDispatchToProps = (dispatch) => ({
-//     getAlbum: (id) => dispatch(fetchAlbum(id)),
-//     getPhotos: (id) => dispatch(fetchPhotosByAlbumId(id)),
-// })
 export default AlbumView;
