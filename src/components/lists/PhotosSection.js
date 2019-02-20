@@ -6,8 +6,8 @@ import Loading from "../Loading";
 import ReadMoreButton from "../ReadMoreButton";
 
 const GET_PHOTOS = gql`
-    query {
-        photos {
+    query photos($limit: Int, $page: Int) {
+        photos(limit: $limit, page: $page) {
             id
             title
             thumbnailUrl
@@ -15,25 +15,51 @@ const GET_PHOTOS = gql`
     }
 `;
 
-const PhotosSection = ({paginate = false}) => (
+const GET_ALBUM_PHOTOS = gql`
+    query albumPhotos($id: ID!) {
+        photos: albumPhotos(id: $id) {
+            id
+            title
+            thumbnailUrl
+        }
+    }
+`;
+
+const LIMIT_PHOTOS = 8
+
+const PhotosSection = ({id = null, paginate = {}}) => (
     <section>
         <h2 className="text-center">Photos</h2>
-        <Query query={GET_PHOTOS}>
-            { ({loading, error, data: {photos}}) => (
+        <Query query={id ? GET_ALBUM_PHOTOS : GET_PHOTOS} variables={id ? {id} : null}>
+            { ({loading, error, data: {photos}, fetchMore}) => (
                     <Loading loading={loading} error={error}>
                         { photos ? (
-                            <div className="grid grid-4">
-                                { photos.map(photo => (
-                                    <PhotoItem photo={photo} key={photo.id} />
-                                )) }
-                            </div>
+                            <React.Fragment>
+                                <div className="grid grid-4">
+                                    { photos.map(photo => (
+                                        <PhotoItem photo={photo} key={photo.id} />
+                                    )) }
+                                </div>
+                                { !(photos.length < LIMIT_PHOTOS) ? 
+                                    typeof paginate.to !== "undefined" ?
+                                        <ReadMoreButton to={paginate.to} /> :
+                                        <ReadMoreButton 
+                                            onClick={() => fetchMore({
+                                                variables: {
+                                                    page: (photos.length / LIMIT_PHOTOS) + 1
+                                                },
+                                                updateQuery: (prev, {fetchMoreResult}) => {
+                                                    if (!fetchMoreResult) return prev;
+                                                    return Object.assign({}, prev, {
+                                                        photos: [...prev.photos, ...fetchMoreResult.photos]
+                                                    });
+                                                }
+                                            })} 
+                                        />
+                                    : ""
+                                }
+                            </React.Fragment>
                         ) : <div>Photos not found!</div>
-                        }
-                        { paginate ? 
-                            typeof paginate.to !== "undefined" ?
-                                <ReadMoreButton to={paginate.to} /> :
-                                <ReadMoreButton onClick={paginate.onClick} />
-                            : ""
                         }
                     </Loading>
                 )

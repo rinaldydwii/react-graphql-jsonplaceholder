@@ -15,29 +15,35 @@ const GET_USERS = gql`
     }
 `;
 
+const LIMIT_USERS = 20
+
 const UsersSection = ({paginate = false}) => (
     <section>
         <h2 className="text-center">Users</h2>
         <Query query={GET_USERS}>
-            { ({loading, error, data: {users}}) => (
+            { ({loading, error, data: {users}}) => {
+                console.log(users)
+                return (
                     <Loading loading={loading} error={error}>
                         { users ? (
+                            <React.Fragment>
                             <div className="grid grid-4">
                                 { users.map(user => (
                                         <UserItem user={user} key={user.id} />
                                     )) 
                                 }
                             </div>
+                            { paginate && !(users.length < LIMIT_USERS) ? 
+                                typeof paginate.to !== "undefined" ?
+                                    <ReadMoreButton to={paginate.to} /> :
+                                    <ReadMoreButton onClick={paginate.onClick} />
+                                : ""
+                            }
+                            </React.Fragment>
                         ) : <div>Empty user!</div>
                         }
-                        { paginate ? 
-                            typeof paginate.to !== "undefined" ?
-                                <ReadMoreButton to={paginate.to} /> :
-                                <ReadMoreButton onClick={paginate.onClick} />
-                            : ""
-                        }
                     </Loading>
-                )
+                )}
             }
         </Query>
     </section>
