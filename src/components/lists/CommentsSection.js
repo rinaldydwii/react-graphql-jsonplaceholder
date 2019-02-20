@@ -2,13 +2,13 @@ import React from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import CommentItem from "../items/CommentItem";
-// import CommentForm from "../CommentForm";
+import CommentForm from "../CommentForm";
 import Loading from "../Loading";
 import Container from "../Container";
 
-const GET_COMMENTS = gql`
-    query {
-        comments {
+const GET_POST_COMMENTS = gql`
+    query postComments($id: ID!) {
+        comments: postComments(id: $id) {
             id
             name
             body
@@ -16,15 +16,12 @@ const GET_COMMENTS = gql`
     }
 `;
 
-const CommentsSection = () => (
+const CommentsSection = ({id}) => (
     <section>
         <h2 className="text-center">Comments</h2>
-        <Query query={GET_COMMENTS}>
+        <Query query={GET_POST_COMMENTS} variables={{id}}>
             { ({loading, error, data: {comments}}) => (
-                    <Loading
-                        loading={loading}
-                        error={error}
-                    >
+                    <Loading loading={loading} error={error} >
                         <Container small>
                             { comments ? (
                                 <div className="list">
@@ -36,7 +33,7 @@ const CommentsSection = () => (
                                     }
                                 </div>
                             ) : <div>Comments not found!</div>}
-                            {/* <CommentForm onSubmitComment={onSubmitComment} /> */}
+                            <CommentForm />
                         </Container>
                     </Loading>
                 )
