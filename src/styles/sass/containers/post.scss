@@ -1,0 +1,22 @@
+.post {
+    header {
+        h1 {
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            line-height: 42px;
+        }
+    }
+    article {
+        margin: 25px 0;
+        line-height: 25px;
+        font-size: 14px;
+        text-align: justify;
+        @include breakpoint (768px){
+            font-size: 16px;
+            line-height: 29px;
+        }
+        p {
+            text-indent: 35px;
+        }
+    }
+}

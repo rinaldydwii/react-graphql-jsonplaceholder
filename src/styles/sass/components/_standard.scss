@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $lato;
+  font-size: 14px;
+  font-weight: 400;
+  color: $black87;
+  @include breakpoint(481px) {
+      font-size: 16px;
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  @include breakpoint(360px) {
+      padding: 0 15px;
+  }
+  @include breakpoint(576px) {
+      width: 540px;
+  }
+  @include breakpoint(768px) {
+      width: 720px;
+  }
+  @include breakpoint(992px) {
+      width: 960px;
+  }
+  @include breakpoint(1200px) {
+      width: 1140px;
+  }
+  &__small {
+    @include breakpoint (768px){
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+  &.view {
+    padding: 40px 0 25px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $black87;
+  &:hover {
+    color: $black50;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $ptSerif;
+  font-weight: 700;
+}
+
+strong {
+  font-weight: 700;
+}
+
+input[type=text], input[type=email], textarea {
+  padding: 8px 10px;
+  border: 1px solid $black50;
+  border-radius: 4px;
+  width: 300px;
+  font-size: 14px;
+  font-family: $lato;
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+h {
+  &1 {
+    font-size: 2em;
+  }
+  &2 {
+    font-size: 1.5em;
+  }
+  &3 {
+    font-size: 1.17em;
+  }
+  &4 {
+    font-size: 1em;
+  }
+  &5 {
+    font-size: 0.83em;
+  }
+  &6 {
+    font-size: 0.67em;
+  }
+}
+
+.text {
+  &-center {
+    text-align: center;
+  }
+  &-left {
+    text-align: left;
+  }
+  &-right {
+    text-align: right;
+  }
+}

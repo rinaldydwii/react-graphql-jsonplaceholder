@@ -1,0 +1,38 @@
+.grid {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    &-4 {
+        grid-template-columns: repeat(1, 1fr);
+        @include breakpoint(576px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include breakpoint(992px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    &__item {
+        border: 1px solid $black50;
+        padding: 15px 12px;
+        border-radius: 6px;
+        -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition:         all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+        &:hover {
+            transform: translateY(-10px);
+        }
+    }
+    &__title {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    &__subtitle {
+        font-size: 14px;
+        color: $black50;
+    }
+    &__thumbnail {
+        margin-bottom: 10px;
+        img {
+            width: 100%;
+        }
+    }
+}
