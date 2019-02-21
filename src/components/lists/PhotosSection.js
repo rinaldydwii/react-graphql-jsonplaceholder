@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import PhotoItem from "../items/PhotoItem";
@@ -27,53 +28,71 @@ const GET_ALBUM_PHOTOS = gql`
 
 const LIMIT_PHOTOS = 8
 
-const PhotosSection = ({id = null, paginate = {}}) => (
-    <section>
-        <h2 className="text-center">Photos</h2>
-        <Query query={id ? GET_ALBUM_PHOTOS : GET_PHOTOS} variables={id ? {id} : null}>
-            { ({loading, error, data: {photos}, fetchMore}) => (
-                    <Loading loading={loading} error={error}>
-                        { photos ? (
-                            <React.Fragment>
-                                <div className="grid grid-4">
-                                    { photos.map((photo, index) => {
-                                        if (typeof paginate.to !== "undefined") {
-                                            if (index < LIMIT_PHOTOS)
+class PhotosSection extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            readmore: true
+        }
+    }
+    render() {
+        const {id = null, paginate = {}} = this.props 
+        return (
+            <section>
+                <h2 className="text-center">Photos</h2>
+                <Query query={id ? GET_ALBUM_PHOTOS : GET_PHOTOS} variables={id ? {id} : null}>
+                    { ({loading, error, data: {photos}, fetchMore}) => (
+                            <Loading loading={loading} error={error}>
+                                { photos ? (
+                                    <React.Fragment>
+                                        <div className="grid grid-4">
+                                            { photos.map((photo, index) => {
+                                                if (typeof paginate.to !== "undefined") {
+                                                    if (index < LIMIT_PHOTOS)
+                                                        return (
+                                                            <PhotoItem photo={photo} key={photo.id} />
+                                                        )
+                                                    else return null
+                                                }
                                                 return (
                                                     <PhotoItem photo={photo} key={photo.id} />
-                                                )
-                                            else return null
+                                                )}
+                                            ) }
+                                        </div>
+                                        { typeof paginate.to !== "undefined" ?
+                                            <ReadMoreButton to={paginate.to} />
+                                            : !(photos.length < LIMIT_PHOTOS) ? 
+                                                <ReadMoreButton 
+                                                    visible={this.state.readmore}
+                                                    onClick={() => fetchMore({
+                                                        variables: {
+                                                            page: (photos.length / LIMIT_PHOTOS) + 1
+                                                        },
+                                                        updateQuery: (prev, {fetchMoreResult}) => {
+                                                            if (!fetchMoreResult) return prev;
+                                                            if (fetchMoreResult.photos.length < LIMIT_PHOTOS) this.setState({readmore: false})
+                                                            return Object.assign({}, prev, {
+                                                                photos: [...prev.photos, ...fetchMoreResult.photos]
+                                                            });
+                                                        }
+                                                    })} 
+                                                /> : ""
                                         }
-                                        return (
-                                            <PhotoItem photo={photo} key={photo.id} />
-                                        )}
-                                    ) }
-                                </div>
-                                { !(photos.length < LIMIT_PHOTOS) ? 
-                                    typeof paginate.to !== "undefined" ?
-                                        <ReadMoreButton to={paginate.to} /> :
-                                        <ReadMoreButton 
-                                            onClick={() => fetchMore({
-                                                variables: {
-                                                    page: (photos.length / LIMIT_PHOTOS) + 1
-                                                },
-                                                updateQuery: (prev, {fetchMoreResult}) => {
-                                                    if (!fetchMoreResult) return prev;
-                                                    return Object.assign({}, prev, {
-                                                        photos: [...prev.photos, ...fetchMoreResult.photos]
-                                                    });
-                                                }
-                                            })} 
-                                        />
-                                    : ""
+                                    </React.Fragment>
+                                ) : <div>Photos not found!</div>
                                 }
-                            </React.Fragment>
-                        ) : <div>Photos not found!</div>
-                        }
-                    </Loading>
-                )
-            }
-        </Query>
-    </section>
-)
+                            </Loading>
+                        )
+                    }
+                </Query>
+            </section>
+        )
+    }
+}
+
 export default PhotosSection;
+
+PhotosSection.propTypes = {
+    id: PropTypes.number,
+    paginate: PropTypes.object
+}
