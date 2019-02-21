@@ -34,9 +34,18 @@ const AlbumsSection = ({id = null, paginate = {}}) => (
                         { albums ? (
                             <React.Fragment>
                                 <div className="grid grid-4">
-                                    { albums.map(album => (
-                                        <AlbumItem album={album} key={album.id} />
-                                    )) }
+                                    { albums.map((album, index) => {
+                                        if (typeof paginate.to !== "undefined") {
+                                            if (index < LIMIT_ALBUMS)
+                                                return (
+                                                    <AlbumItem album={album} key={album.id} />
+                                                )
+                                            else return null
+                                        }
+                                        return(
+                                            <AlbumItem album={album} key={album.id} />
+                                        )}
+                                    ) }
                                 </div>
                                 { !(albums.length < LIMIT_ALBUMS) ? 
                                     typeof paginate.to !== "undefined" ?

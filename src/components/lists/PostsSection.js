@@ -35,9 +35,18 @@ const PostsSection = ({id = null, paginate = {}}) => {
                             { posts ? (
                                 <React.Fragment>
                                     <div className="grid grid-4">
-                                        { posts.map(post => (
-                                            <PostItem post={post} key={post.id} />
-                                        )) }
+                                        { posts.map((post, index) => {
+                                            if (typeof paginate.to !== "undefined") {
+                                                if (index < LIMIT_POSTS)
+                                                    return (
+                                                        <PostItem post={post} key={post.id} />
+                                                    )
+                                                else return null
+                                            }
+                                            return (
+                                                <PostItem post={post} key={post.id} />
+                                            )}
+                                        ) }
                                     </div>
                                     { !(posts.length < LIMIT_POSTS) ? 
                                         typeof paginate.to !== "undefined" ?

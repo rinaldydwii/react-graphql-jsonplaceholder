@@ -36,9 +36,18 @@ const PhotosSection = ({id = null, paginate = {}}) => (
                         { photos ? (
                             <React.Fragment>
                                 <div className="grid grid-4">
-                                    { photos.map(photo => (
-                                        <PhotoItem photo={photo} key={photo.id} />
-                                    )) }
+                                    { photos.map((photo, index) => {
+                                        if (typeof paginate.to !== "undefined") {
+                                            if (index < LIMIT_PHOTOS)
+                                                return (
+                                                    <PhotoItem photo={photo} key={photo.id} />
+                                                )
+                                            else return null
+                                        }
+                                        return (
+                                            <PhotoItem photo={photo} key={photo.id} />
+                                        )}
+                                    ) }
                                 </div>
                                 { !(photos.length < LIMIT_PHOTOS) ? 
                                     typeof paginate.to !== "undefined" ?
