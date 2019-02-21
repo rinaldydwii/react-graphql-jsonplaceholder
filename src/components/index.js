@@ -1,3 +1,4 @@
+import View from './View'
 import Container from './Container'
 import Loading from './Loading'
 import Navbar from './Navbar'
@@ -10,6 +11,7 @@ import AlbumsSection from './lists/AlbumsSection'
 import PhotosSection from './lists/PhotosSection'
 
 export {
+    View,
     Container,
     Loading,
     Navbar,
