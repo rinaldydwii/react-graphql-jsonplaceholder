@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom"
 import Container from "./Container";
 
 class Navbar extends Component {
@@ -28,15 +29,15 @@ class Navbar extends Component {
             <div className={`nav ${this.state.stickyNav ? "sticky" : ""}`}>
                 <Container>
                     <div className="nav__brand">
-                        <a href="/">rinaldydwii</a>
+                        <NavLink to="/">rinaldydwii</NavLink>
                     </div>
                     <nav>
                         <ul>
-                            <li className="nav__item"><a href="/">Home</a></li>
-                            <li className="nav__item"><a href="/users">Users</a></li>
-                            <li className="nav__item"><a href="/posts">Posts</a></li>
-                            <li className="nav__item"><a href="/albums">Albums</a></li>
-                            <li className="nav__item"><a href="/photos">Photos</a></li>
+                            <li className="nav__item"><NavLink to="/">Home</NavLink></li>
+                            <li className="nav__item"><NavLink to="/users">Users</NavLink></li>
+                            <li className="nav__item"><NavLink to="/posts">Posts</NavLink></li>
+                            <li className="nav__item"><NavLink to="/albums">Albums</NavLink></li>
+                            <li className="nav__item"><NavLink to="/photos">Photos</NavLink></li>
                         </ul>
                     </nav>
                 </Container>
