@@ -1,13 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Router from './routes';
-import { Navbar, Footer } from './components';
 
 const App = () => (
-  <Fragment>
-    <Navbar />
-    <Router />
-    <Footer />
-  </Fragment>
+  <Router />
 )
 
 export default App;
