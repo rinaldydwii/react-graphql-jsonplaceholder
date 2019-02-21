@@ -33,7 +33,7 @@ const CommentsSection = ({id}) => (
                                     }
                                 </div>
                             ) : <div>Comments not found!</div>}
-                            <CommentForm />
+                            {/* <CommentForm /> */}
                         </Container>
                     </Loading>
                 )
