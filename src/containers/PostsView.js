@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Container, PostsSection } from "../components";
+import { View, PostsSection } from "../components";
 
 class PostsView extends Component {
     render() {
         return (
-            <Container>
+            <View>
                 <PostsSection />
-            </Container>
+            </View>
         );
     }
 }

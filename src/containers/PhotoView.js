@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-// import { connect } from 'react-redux';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Container, Loading } from "../components";
-// import { fetchPhoto } from "../actions/photoActions";
+import { View, Loading } from "../components";
 
 const GET_PHOTO = gql`
     query photo($id: ID!) {
@@ -17,9 +15,6 @@ const GET_PHOTO = gql`
 `;
 
 class PhotoView extends Component {
-    // componentDidMount() {
-    //     this.props.getPhoto(this.props.match.params.id)
-    // }
     constructor() {
         super()
         this.state = {
@@ -30,10 +25,9 @@ class PhotoView extends Component {
         this.setState({photoId: this.props.match.params.id})
     }
     render() {
-        // const { photo } = this.props
         const id = this.state.photoId
         return (
-            <Container className="view text-center">
+            <View containerClassName="view text-center">
                 {
                     id ? (
                         <Query query={GET_PHOTO} variables={{id}}>
@@ -56,19 +50,9 @@ class PhotoView extends Component {
                         </Query>
                     ) : ""
                 }
-            </Container>
+            </View>
         );
     }
 }
 
-// const mapStateToProps = state => ({
-//     photo: state.photoReducer.photo,
-//     loading: state.photoReducer.loading,
-//     finish: state.photoReducer.finish,
-//     error: state.photoReducer.error,
-// })
-  
-// const mapDispatchToProps = (dispatch) => ({
-//     getPhoto: (id) => dispatch(fetchPhoto(id)),
-// })
 export default PhotoView;

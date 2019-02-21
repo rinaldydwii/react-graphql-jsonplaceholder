@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Link } from "react-router-dom"
-import { Container, CommentsSection, Loading } from "../components";
+import { View, Container, CommentsSection, Loading } from "../components";
 // import { fetchPost, deletePost } from "../actions/postActions";
 // import { fetchCommentsById, createComment } from "../actions/commentActions";
 
@@ -51,7 +51,7 @@ class PostView extends Component {
         // const { post } = this.props
         const id = this.state.userId
         return (
-            <Container className="view">
+            <View containerClassName="view">
                 {
                     id ? (
                         <Query query={GET_POST} variables={{id}}>
@@ -85,7 +85,7 @@ class PostView extends Component {
                         </Query>
                     ) : ""
                 }
-            </Container>
+            </View>
         );
     }
 }

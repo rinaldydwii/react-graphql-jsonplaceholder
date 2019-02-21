@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { ProfileSection, PostsSection, AlbumsSection, Container, Loading } from "../components";
+import { View, ProfileSection, PostsSection, AlbumsSection, Loading } from "../components";
 
 const GET_USER = gql`
     query user($id: ID!) {
@@ -38,7 +38,7 @@ class UserView extends Component {
     render() {
         const id = this.state.userId
         return (
-            <Container>
+            <View>
                 <div className="profile">
                     {
                         id ? (
@@ -70,7 +70,7 @@ class UserView extends Component {
                         ) : ""
                     }
                 </div>
-            </Container>
+            </View>
         );
     }
 }

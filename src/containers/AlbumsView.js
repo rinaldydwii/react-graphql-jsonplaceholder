@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Container, AlbumsSection } from "../components";
+import { View, AlbumsSection } from "../components";
 
 class AlbumsView extends Component {
     render() {
         return (
-            <Container>
+            <View>
                 <AlbumsSection />
-            </Container>
+            </View>
         );
     }
 }

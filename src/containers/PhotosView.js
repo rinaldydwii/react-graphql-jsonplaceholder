@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Container, PhotosSection } from "../components";
+import { View, PhotosSection } from "../components";
 
 class PhotosView extends Component {
     render() {
         return (
-            <Container>
+            <View>
                 <PhotosSection />
-            </Container>
+            </View>
         );
     }
 }

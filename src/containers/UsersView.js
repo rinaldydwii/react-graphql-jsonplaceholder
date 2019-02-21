@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Container, UsersSection } from "../components";
+import { View, UsersSection } from "../components";
 
 class UsersView extends Component {
     render() {
         return (
-            <Container>
+            <View>
                 <UsersSection />
-            </Container>
+            </View>
         );
     }
 }

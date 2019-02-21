@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Container, PhotosSection, Loading } from "../components";
+import { View, PhotosSection, Loading } from "../components";
 
 const GET_ALBUM = gql`
     query album($id: ID!) {
@@ -23,10 +23,9 @@ class AlbumView extends Component {
         this.setState({albumId: this.props.match.params.id})
     }
     render() {
-        // const { album } = this.props
         const id = this.state.albumId
         return (
-            <Container className="view">
+            <View containerClassName="view">
                 {
                     id ? (
                         <Query query={GET_ALBUM} variables={{id}}>
@@ -47,7 +46,7 @@ class AlbumView extends Component {
                         </Query>
                     ) : ""
                 }
-            </Container>
+            </View>
         );
     }
 }
