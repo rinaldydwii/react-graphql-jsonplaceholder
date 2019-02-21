@@ -6,8 +6,8 @@ import UserItem from "../items/UserItem";
 import ReadMoreButton from "../ReadMoreButton";
 
 const GET_USERS = gql`
-    query {
-        users {
+    query users($limit: Int, $page: Int) {
+        users(limit: $limit, page: $page) {
             id
             name
             username
@@ -21,7 +21,7 @@ const UsersSection = ({paginate = false}) => (
     <section>
         <h2 className="text-center">Users</h2>
         <Query query={GET_USERS}>
-            { ({loading, error, data: {users}}) => {
+            { ({loading, error, data: {users}, fetchMore}) => {
                 return (
                     <Loading loading={loading} error={error}>
                         { users ? (
@@ -43,7 +43,19 @@ const UsersSection = ({paginate = false}) => (
                                 { paginate && !(users.length < LIMIT_USERS) ? 
                                     typeof paginate.to !== "undefined" ?
                                         <ReadMoreButton to={paginate.to} /> :
-                                        <ReadMoreButton onClick={paginate.onClick} />
+                                        <ReadMoreButton 
+                                            onClick={async() => await fetchMore({
+                                                variables: {
+                                                    page: (users.length / LIMIT_USERS) + 1
+                                                },
+                                                updateQuery: (prev, {fetchMoreResult}) => {
+                                                    if (!fetchMoreResult) return prev;
+                                                    return Object.assign({}, prev, {
+                                                        users: [...prev.users, ...fetchMoreResult.users]
+                                                    });
+                                                }
+                                            })} 
+                                        />
                                     : ""
                                 }
                             </React.Fragment>
