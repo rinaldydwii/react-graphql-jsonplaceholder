@@ -46,7 +46,7 @@ class PhotosSection extends React.Component {
                     </div>
                     <h2 className="text-center">Photos</h2>
                     <div className="section__button">
-                        { create ? <Link to={`albums/${id}/photos/create`} className="button button__action">New Photo</Link> : ""}
+                        { create ? <Link to={`/albums/${id}/photos/create`} className="button button__action">New Photo</Link> : ""}
                     </div>
                 </div>
                 <Query query={id ? GET_ALBUM_PHOTOS : GET_PHOTOS} variables={id ? {id} : null}>

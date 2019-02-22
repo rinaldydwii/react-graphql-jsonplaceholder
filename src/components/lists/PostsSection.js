@@ -44,7 +44,7 @@ class PostsSection extends React.Component {
                     </div>
                     <h2 className="text-center">Posts</h2>
                     <div className="section__button">
-                        { create ? <Link to={`users/${id}/posts/create`} className="button button__action">New Post</Link> : "" }
+                        { create ? <Link to={`/users/${id}/posts/create`} className="button button__action">New Post</Link> : "" }
                     </div>
                 </div>
                 <Query query={id ? GET_USER_POSTS : GET_POSTS} variables={id ? {id, limit: LIMIT_POSTS, page: 1} : null}>

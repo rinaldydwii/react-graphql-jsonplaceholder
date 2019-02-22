@@ -43,7 +43,7 @@ class AlbumsSection extends React.Component {
                     </div>
                     <h2 className="text-center">Albums</h2>
                     <div className="section__button">
-                        { create ? <Link to={`users/${id}/albums/create`} className="button button__action">New Album</Link> : ""}
+                        { create ? <Link to={`/users/${id}/albums/create`} className="button button__action">New Album</Link> : ""}
                     </div>
                 </div>
                 <Query query={id ? GET_USER_ALBUMS : GET_ALBUMS} variables={id ? {id} : null}>
