@@ -100,6 +100,6 @@ class AlbumsSection extends React.Component {
 export default AlbumsSection;
 
 AlbumsSection.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     paginate: PropTypes.object
 }

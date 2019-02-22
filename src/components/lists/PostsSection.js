@@ -101,6 +101,6 @@ class PostsSection extends React.Component {
 export default PostsSection;
 
 PostsSection.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     paginate: PropTypes.object
 }

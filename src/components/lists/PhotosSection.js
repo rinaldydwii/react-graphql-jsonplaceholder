@@ -103,6 +103,6 @@ class PhotosSection extends React.Component {
 export default PhotosSection;
 
 PhotosSection.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     paginate: PropTypes.object
 }
