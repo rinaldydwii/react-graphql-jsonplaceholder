@@ -63,19 +63,22 @@ strong {
   font-weight: 700;
 }
 
-input[type=text], input[type=email], textarea {
+label {
+  display: inline-block;
+  width: 120px;
+  padding: 8px 0;
+}
+
+input, textarea {
   padding: 8px 10px;
-  border: 1px solid $black50;
   border-radius: 4px;
-  width: 300px;
+  border: 1px solid $black50;
   font-size: 14px;
   font-family: $lato;
-  &:focus {
-    outline: none;
-  }
 }
 
 textarea {
+  vertical-align: top;
   resize: none;
   height: 80px;
 }
