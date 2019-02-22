@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { View, Loading } from "../components";
+import { View, Loading } from "../../components";
 
 const GET_PHOTO = gql`
     query photo($id: ID!) {

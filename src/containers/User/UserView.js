@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { View, ProfileSection, PostsSection, AlbumsSection, Loading } from "../components";
+import { View, ProfileSection, PostsSection, AlbumsSection, Loading } from "../../components";
 
 const GET_USER = gql`
     query user($id: ID!) {

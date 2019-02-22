@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, UsersSection } from "../components";
+import { View, UsersSection } from "../../components";
 
 class UsersView extends Component {
     render() {
