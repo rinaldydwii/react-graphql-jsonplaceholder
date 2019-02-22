@@ -24,14 +24,16 @@
         margin: 20px auto 0;
     }
     &__action {
-        font-size: 10px;
-        padding: 0;
-        background: none;
-        border: none;
-        color: $black50;
-        margin: 0 10px;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px;
+        border-radius: 8px;
         @include breakpoint(481px) {
             font-size: 12px;
+        }
+        &:hover {
+            color: $black50;
+            border-color: $black50;
         }
     }
 }

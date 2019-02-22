@@ -57,8 +57,8 @@ class UserView extends Component {
                                                             </div>
                                                         </header>
                                                         <ProfileSection user={user} />
-                                                        <PostsSection id={id} />
-                                                        <AlbumsSection id={id} />
+                                                        <PostsSection id={id} create />
+                                                        <AlbumsSection id={id} create />
                                                     </React.Fragment>
                                                 )
                                                 : <p>User not found!</p>

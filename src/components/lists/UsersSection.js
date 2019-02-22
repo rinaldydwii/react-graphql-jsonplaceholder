@@ -19,7 +19,9 @@ const LIMIT_USERS = 20
 
 const UsersSection = ({paginate = false}) => (
     <section>
-        <h2 className="text-center">Users</h2>
+        <div className="section__title">
+            <h2 className="text-center">Users</h2>
+        </div>
         <Query query={GET_USERS}>
             { ({loading, error, data: {users}, fetchMore}) => {
                 return (

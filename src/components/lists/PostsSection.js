@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import PostItem from "../items/PostItem";
@@ -34,10 +35,18 @@ class PostsSection extends React.Component {
         }
     }
     render() {
-        const {id = null, paginate = {}} = this.props 
+        const {id = null, paginate = {}, create = false} = this.props 
         return (
             <section>
-                <h2 className="text-center">Posts</h2>
+                <div className="section__title">
+                    <div className="section__button">
+
+                    </div>
+                    <h2 className="text-center">Posts</h2>
+                    <div className="section__button">
+                        { create ? <Link to={`users/${id}/posts/create`} className="button button__action">New Post</Link> : "" }
+                    </div>
+                </div>
                 <Query query={id ? GET_USER_POSTS : GET_POSTS} variables={id ? {id, limit: LIMIT_POSTS, page: 1} : null}>
                     { ({loading, error, data: {posts}, fetchMore}) => (
                             <Loading loading={loading} error={error}>

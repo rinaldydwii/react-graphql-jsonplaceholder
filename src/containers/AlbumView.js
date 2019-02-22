@@ -36,7 +36,7 @@ class AlbumView extends Component {
                                         { album ? (
                                                 <React.Fragment>
                                                     <h1 className="text-center">{album.title}</h1>
-                                                    <PhotosSection id={id} />
+                                                    <PhotosSection id={id} create />
                                                 </React.Fragment>
                                             ) : ""
                                         }

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom"
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import AlbumItem from "../items/AlbumItem";
@@ -34,10 +35,17 @@ class AlbumsSection extends React.Component {
         }
     }
     render() {
-        const {id = null, paginate = {}} = this.props 
+        const {id = null, paginate = {}, create = false} = this.props 
         return (
             <section>
-                <h2 className="text-center">Albums</h2>
+                <div className="section__title">
+                    <div className="section__button">
+                    </div>
+                    <h2 className="text-center">Albums</h2>
+                    <div className="section__button">
+                        { create ? <Link to={`users/${id}/albums/create`} className="button button__action">New Album</Link> : ""}
+                    </div>
+                </div>
                 <Query query={id ? GET_USER_ALBUMS : GET_ALBUMS} variables={id ? {id} : null}>
                     { ({loading, error, data: {albums}, fetchMore}) => (
                             <Loading loading={loading} error={error}>

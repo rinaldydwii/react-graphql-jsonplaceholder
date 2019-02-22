@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom"
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import PhotoItem from "../items/PhotoItem";
@@ -36,10 +37,18 @@ class PhotosSection extends React.Component {
         }
     }
     render() {
-        const {id = null, paginate = {}} = this.props 
+        const {id = null, paginate = {}, create = false} = this.props 
         return (
             <section>
-                <h2 className="text-center">Photos</h2>
+                <div className="section__title">
+                    <div className="section__button">
+
+                    </div>
+                    <h2 className="text-center">Photos</h2>
+                    <div className="section__button">
+                        { create ? <Link to={`albums/${id}/photos/create`} className="button button__action">New Photo</Link> : ""}
+                    </div>
+                </div>
                 <Query query={id ? GET_ALBUM_PHOTOS : GET_PHOTOS} variables={id ? {id} : null}>
                     { ({loading, error, data: {photos}, fetchMore}) => (
                             <Loading loading={loading} error={error}>
