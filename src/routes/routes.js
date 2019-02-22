@@ -1,15 +1,15 @@
-import UsersView from "../containers/UsersView";
-import UserView from "../containers/UserView";
-import PostsView from "../containers/PostsView";
-import PostView from "../containers/PostView";
-import AlbumsView from "../containers/AlbumsView";
-import AlbumView from "../containers/AlbumView";
-import PhotosView from "../containers/PhotosView";
-import PhotoView from "../containers/PhotoView";
+import UsersView from "../containers/User/UsersView";
+import UserView from "../containers/User/UserView";
+import PostsView from "../containers/Post/PostsView";
+import PostView from "../containers/Post/PostView";
+import AlbumsView from "../containers/Album/AlbumsView";
+import AlbumView from "../containers/Album/AlbumView";
+import PhotosView from "../containers/Photo/PhotosView";
+import PhotoView from "../containers/Photo/PhotoView";
 import HomeView from "../containers/HomeView";
-// import Error404View from "../containers/Error404View";
-// import EditPostView from "../containers/EditPostView";
-// import AddPostView from "../containers/AddPostView";
+import CreatePostView from "../containers/Post/CreatePostView";
+import CreateAlbumView from "../containers/Album/CreateAlbumView";
+import CreatePhotoView from "../containers/Photo/CreatePhotoView";
 
 export const routes = [
     {
@@ -29,19 +29,19 @@ export const routes = [
     },
     {
         exact: true,
+        path: "/users/:id/posts/create",
+        component: CreatePostView
+    },
+    {
+        exact: true,
+        path: "/users/:id/albums/create",
+        component: CreateAlbumView
+    },
+    {
+        exact: true,
         path: "/posts",
         component: PostsView
     },
-    // {
-    //     exact: true,
-    //     path: "/posts/add",
-    //     component: AddPostView
-    // },
-    // {
-    //     exact: true,
-    //     path: "/posts/:id/edit",
-    //     component: EditPostView
-    // },
     {
         exact: true,
         path: "/posts/:id",
@@ -59,6 +59,11 @@ export const routes = [
     },
     {
         exact: true,
+        path: "/albums/:id/photos/create",
+        component: CreatePhotoView
+    },
+    {
+        exact: true,
         path: "/photos",
         component: PhotosView
     },
@@ -67,9 +72,4 @@ export const routes = [
         path: "/photos/:id",
         component: PhotoView
     },
-    // {
-    //     exact: false,
-    //     path: "",
-    //     component: Error404View
-    // }
 ]
