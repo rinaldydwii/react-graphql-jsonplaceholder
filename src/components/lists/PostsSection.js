@@ -64,7 +64,8 @@ class PostsSection extends React.Component {
                                                     visible={this.state.readmore}
                                                     onClick={() => fetchMore({
                                                         variables: {
-                                                            page: (posts.length / LIMIT_POSTS) + 1
+                                                            page: (posts.length / LIMIT_POSTS) + 1,
+                                                            query: id ? GET_USER_POSTS : GET_POSTS
                                                         },
                                                         updateQuery: (prev, {fetchMoreResult}) => {
                                                             if (!fetchMoreResult) return prev;

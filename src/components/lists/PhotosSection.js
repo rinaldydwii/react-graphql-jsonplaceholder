@@ -17,8 +17,8 @@ const GET_PHOTOS = gql`
 `;
 
 const GET_ALBUM_PHOTOS = gql`
-    query albumPhotos($id: ID!) {
-        photos: albumPhotos(id: $id) {
+    query albumPhotos($id: ID!, $limit: Int, $page: Int) {
+        photos: albumPhotos(id: $id, limit: $limit, page: $page) {
             id
             title
             thumbnailUrl
@@ -66,7 +66,8 @@ class PhotosSection extends React.Component {
                                                     visible={this.state.readmore}
                                                     onClick={() => fetchMore({
                                                         variables: {
-                                                            page: (photos.length / LIMIT_PHOTOS) + 1
+                                                            page: (photos.length / LIMIT_PHOTOS) + 1,
+                                                            query: id ? GET_ALBUM_PHOTOS : GET_PHOTOS
                                                         },
                                                         updateQuery: (prev, {fetchMoreResult}) => {
                                                             if (!fetchMoreResult) return prev;

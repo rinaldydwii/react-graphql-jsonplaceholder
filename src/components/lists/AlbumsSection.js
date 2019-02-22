@@ -16,8 +16,8 @@ const GET_ALBUMS = gql`
 `;
 
 const GET_USER_ALBUMS = gql`
-    query userAlbums($id: ID!) {
-        albums: userAlbums(id: $id) {
+    query userAlbums($id: ID!, $limit: Int, $page: Int) {
+        albums: userAlbums(id: $id, limit: $limit, page: $page) {
             id
             title
         }
@@ -64,7 +64,8 @@ class AlbumsSection extends React.Component {
                                                     visible={this.state.readmore}
                                                     onClick={() => fetchMore({
                                                         variables: {
-                                                            page: (albums.length / LIMIT_ALBUMS) + 1
+                                                            page: (albums.length / LIMIT_ALBUMS) + 1,
+                                                            query: id ? GET_USER_ALBUMS : GET_ALBUMS
                                                         },
                                                         updateQuery: (prev, {fetchMoreResult}) => {
                                                             if (!fetchMoreResult) return prev;
