@@ -3,10 +3,10 @@ import Container from './Container'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-const View = ({children, containerClassName}) => (
+const View = ({children, containerClassName, smallContainer = false}) => (
     <React.Fragment>
         <Navbar />
-        <Container className={containerClassName}>
+        <Container className={containerClassName} small={smallContainer}>
             {children}
         </Container>
         <Footer />
