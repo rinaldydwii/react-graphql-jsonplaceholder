@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import { View, Loading } from "../../components";
 import { redirect } from "../../history";
+import { getValidationError, isFormValid } from "../../validations";
 
 const GET_ALBUM = gql`
     query album($id: ID!) {
@@ -27,9 +28,19 @@ class EditAlbumView extends Component {
         this.state = {
             albumId: null,
         }
+        this.handleChangeTitle.bind(this)
+        this.input = {}
     }
     componentDidMount() {
         this.setState({albumId: this.props.match.params.id})
+    }
+    handleChangeTitle = (e, prev) => {
+        return Object.assign({}, prev, {
+            album: {
+                ...prev.album, 
+                title: e.target.value
+            }
+        });
     }
     render() {
         const id = this.state.albumId
@@ -53,33 +64,31 @@ class EditAlbumView extends Component {
                                                 <form className="form"
                                                     onSubmit={async (e) => {
                                                         e.preventDefault()
-                                                        await updateAlbum({
-                                                            variables: {
-                                                                id: id,
-                                                                album: {
-                                                                    userId: album.id,
-                                                                    title: e.target.title.value,
+                                                        if (isFormValid(e, this.input))
+                                                            await updateAlbum({
+                                                                variables: {
+                                                                    id: id,
+                                                                    album: {
+                                                                        userId: album.id,
+                                                                        title: e.target.title.value,
+                                                                    }
                                                                 }
-                                                            }
-                                                        })
+                                                            })
                                                     }}
                                                 >
-                                                    <div className="form__row">
+                                                    <div className={`form__row ${getValidationError('title', album.title).className}`}>
                                                         <label htmlFor="title">Title</label>
-                                                        <input 
-                                                            placeholder="Title" 
-                                                            name="title" 
-                                                            value={album.title} 
-                                                            onChange={(e) => updateQuery((prev) => {
-                                                                return Object.assign({}, prev, {
-                                                                        album: {
-                                                                            ...prev.album, 
-                                                                            title: e.target.value
-                                                                        }
-                                                                    });
-                                                            })}
-                                                            type="text" 
-                                                        />
+                                                        <div className="form__group">
+                                                            <input 
+                                                                placeholder="Title" 
+                                                                name="title" 
+                                                                value={album.title} 
+                                                                onChange={(e) => updateQuery((prev) => this.handleChangeTitle(e, prev))}
+                                                                ref={input => this.input["title"] = input}
+                                                                type="text" 
+                                                            />
+                                                            {getValidationError('body', album.title).dom}
+                                                        </div>
                                                     </div>
                                                     <div className="form__row">
                                                         <div className="form__space"></div>
