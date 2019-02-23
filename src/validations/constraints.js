@@ -18,5 +18,18 @@ export const constraints = {
         presence: {
             message: "Thumbnail Url is Required"
         }
-    }
+    },
+    name: {
+        presence: {
+            message: "Name is Required"
+        }
+    },
+    email: {
+        presence: {
+            message: "Email is Required"
+        },
+        email: {
+            message: "Please input a valid email"
+        }
+    },
 }
