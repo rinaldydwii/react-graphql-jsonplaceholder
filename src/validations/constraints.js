@@ -8,5 +8,15 @@ export const constraints = {
         presence: {
             message: "Body is Required"
         }
+    },
+    url: {
+        presence: {
+            message: "Url is Required"
+        }
+    },
+    thumbnailUrl: {
+        presence: {
+            message: "Thumbnail Url is Required"
+        }
     }
 }
