@@ -36,4 +36,15 @@
             border-bottom-color: $narturcianFlower;
         }
     }
+    &__comment {
+        input, textarea {
+            border: 1px solid $black50;
+            border-radius: 8px;
+        }
+        .form__error-input {
+            input, textarea {
+                border-color: $narturcianFlower;
+            }
+        }
+    }
 }
