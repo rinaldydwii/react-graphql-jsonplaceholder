@@ -20,23 +20,22 @@ const CommentsSection = ({id}) => (
     <section>
         <h2 className="text-center">Comments</h2>
         <Query query={GET_POST_COMMENTS} variables={{id}}>
-            { ({loading, error, data: {comments}}) => (
+            { ({loading, error, data: {comments}, updateQuery}) => {
+                return (
                     <Loading loading={loading} error={error} >
                         <Container small>
                             { comments ? (
                                 <div className="list">
-                                    { comments.map((comment, index) => (
-                                            <CommentItem comment={comment} key={comment.id} index={index} 
-                                                // postId={postId} 
-                                            />
+                                    { comments.reverse().map(comment => (
+                                            <CommentItem comment={comment} key={comment.id} />
                                         ))
                                     }
                                 </div>
-                            ) : <div>Comments not found!</div>}
-                            {/* <CommentForm /> */}
+                            ) : <div>Comments is empty!</div>}
+                            <CommentForm id={id} updateQuery={updateQuery} />
                         </Container>
                     </Loading>
-                )
+                )}
             }
         </Query>
     </section>
