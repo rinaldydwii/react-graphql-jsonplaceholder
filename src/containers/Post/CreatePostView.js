@@ -55,8 +55,6 @@ class CreatePostView extends Component {
                                         <input 
                                             placeholder="Title" 
                                             name="title" 
-                                            // value={value ? value.name : ""} 
-                                            // onChange={onChange ? onChange.name : null} 
                                             type="text" 
                                         />
                                     </div>
@@ -65,10 +63,7 @@ class CreatePostView extends Component {
                                         <textarea 
                                             placeholder="Body" 
                                             name="body" 
-                                            // value={value ? value.name : ""} 
-                                            // onChange={onChange ? onChange.name : null} 
                                         />
-                                        
                                     </div>
                                     <div className="form__row">
                                         <div className="form__space"></div>
