@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { View } from "../../components";
-import { redirect } from "../../history"
+import { redirect } from "../../history";
 
 const CREATE_POST = gql `
     mutation CreatePost($post: PostInput!) {
