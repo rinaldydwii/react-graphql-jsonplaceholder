@@ -1,15 +1,18 @@
+import HomeView from "../containers/HomeView";
 import UsersView from "../containers/User/UsersView";
 import UserView from "../containers/User/UserView";
 import PostsView from "../containers/Post/PostsView";
 import PostView from "../containers/Post/PostView";
+import CreatePostView from "../containers/Post/CreatePostView";
+import EditPostView from "../containers/Post/EditPostView";
 import AlbumsView from "../containers/Album/AlbumsView";
 import AlbumView from "../containers/Album/AlbumView";
+import CreateAlbumView from "../containers/Album/CreateAlbumView";
+import EditAlbumView from "../containers/Album/EditAlbumView";
 import PhotosView from "../containers/Photo/PhotosView";
 import PhotoView from "../containers/Photo/PhotoView";
-import HomeView from "../containers/HomeView";
-import CreatePostView from "../containers/Post/CreatePostView";
-import CreateAlbumView from "../containers/Album/CreateAlbumView";
 import CreatePhotoView from "../containers/Photo/CreatePhotoView";
+import EditPhotoView from "../containers/Photo/EditPhotoView";
 
 export const routes = [
     {
@@ -49,6 +52,11 @@ export const routes = [
     },
     {
         exact: true,
+        path: "/posts/:id/edit",
+        component: EditPostView
+    },
+    {
+        exact: true,
         path: "/albums",
         component: AlbumsView
     },
@@ -56,6 +64,11 @@ export const routes = [
         exact: true,
         path: "/albums/:id",
         component: AlbumView
+    },
+    {
+        exact: true,
+        path: "/albums/:id/edit",
+        component: EditAlbumView
     },
     {
         exact: true,
@@ -71,5 +84,10 @@ export const routes = [
         exact: true,
         path: "/photos/:id",
         component: PhotoView
+    },
+    {
+        exact: true,
+        path: "/photos/:id/edit",
+        component: EditPhotoView
     },
 ]
