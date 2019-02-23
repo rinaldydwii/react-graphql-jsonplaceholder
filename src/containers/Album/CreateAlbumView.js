@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { View } from "../../components";
-import { redirect } from "../../history"
+import { redirect } from "../../history";
+import { getValidationError, isFormValid } from "../../validations";
 
 const CREATE_ALBUM = gql `
     mutation CreateAlbum($album: AlbumInput!) {
@@ -16,11 +17,18 @@ class CreateAlbumView extends Component {
     constructor() {
         super()
         this.state = {
-            userId: null
+            userId: null,
+            title: null,
         }
+        this.handleChangeTitle.bind(this)
+        this.input = {}
     }
     componentDidMount() {
         this.setState({userId: this.props.match.params.id})
+    }
+    handleChangeTitle = (e) => {
+        const title = e.target.value
+        this.setState({title})
     }
     render() {
         const id = this.state.userId
@@ -39,25 +47,30 @@ class CreateAlbumView extends Component {
                                 <form className="form"
                                     onSubmit={async (e) => {
                                         e.preventDefault()
-                                        await createAlbum({
-                                            variables: {
-                                                album: {
-                                                    userId: id,
-                                                    title: e.target.title.value,
+                                        if (isFormValid(e, this.input))
+                                            await createAlbum({
+                                                variables: {
+                                                    album: {
+                                                        userId: id,
+                                                        title: e.target.title.value,
+                                                    }
                                                 }
-                                            }
-                                        })
+                                            })
                                     }}
                                 >
-                                    <div className="form__row">
+                                    <div className={`form__row ${getValidationError('title', this.state.title).className}`}>
                                         <label htmlFor="title">Title</label>
-                                        <input 
-                                            placeholder="Title" 
-                                            name="title" 
-                                            // value={value ? value.name : ""} 
-                                            // onChange={onChange ? onChange.name : null} 
-                                            type="text" 
-                                        />
+                                        <div className="form__group">
+                                            <input 
+                                                placeholder="Title" 
+                                                name="title" 
+                                                onChange={this.handleChangeTitle}
+                                                onFocus={this.handleChangeTitle}
+                                                ref={input => this.input["title"] = input}
+                                                type="text" 
+                                            />
+                                            {getValidationError('title', this.state.title).dom}
+                                        </div>
                                     </div>
                                     <div className="form__row">
                                         <div className="form__space"></div>
