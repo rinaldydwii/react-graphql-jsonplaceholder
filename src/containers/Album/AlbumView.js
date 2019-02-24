@@ -35,7 +35,7 @@ class AlbumView extends Component {
     render() {
         const id = this.state.albumId
         return (
-            <View containerClassName="view">
+            <View>
                 {
                     id ? (
                         <Query query={GET_ALBUM} variables={{id}}>
