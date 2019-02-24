@@ -48,11 +48,12 @@ class CommentsSection extends React.Component {
                                                         visible={this.state.readmore}
                                                         onClick={() => fetchMore({
                                                             variables: {
-                                                                page: (comments.length / LIMIT_COMMENTS) + 1,
+                                                                page: Math.floor(comments.length / LIMIT_COMMENTS) + 1,
                                                             },
                                                             updateQuery: (prev, {fetchMoreResult}) => {
                                                                 if (!fetchMoreResult) return prev;
                                                                 if (fetchMoreResult.comments.length < LIMIT_COMMENTS) this.setState({readmore: false})
+                                                                if (comments.length > LIMIT_COMMENTS) fetchMoreResult.comments.splice(0, comments.length - LIMIT_COMMENTS)
                                                                 return Object.assign({}, prev, {
                                                                     comments: [...fetchMoreResult.comments, ...prev.comments].reverse()
                                                                 });
