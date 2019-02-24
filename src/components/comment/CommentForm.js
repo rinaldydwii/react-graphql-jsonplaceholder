@@ -1,19 +1,20 @@
 import React from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import { getValidationError, isFormValid } from "../validations";
-import Loading from "./Loading";
+import { getValidationError, isFormValid } from "../../validations";
+import Loading from "../Loading";
 
 const CREATE_COMMENT = gql `
     mutation createComment($comment: CommentInput!) {
         comment: createComment(comment: $comment) {
+            postId
             id
             name
             email
             body
         }
     }
-`
+`;
 
 class CommentForm extends React.Component {
     constructor() {
