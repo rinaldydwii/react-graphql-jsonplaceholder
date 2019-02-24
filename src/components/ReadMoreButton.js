@@ -15,7 +15,7 @@ class ReadMoreButton extends React.Component {
         this.setState({loading: false})
     }
     render() {
-        const {to, visible = true} = this.props
+        const {to, visible = true, comment = false} = this.props
         return (
             <div className={`text-center${visible ? "" : " hidden"}`}>
                 { to ? 
@@ -25,8 +25,8 @@ class ReadMoreButton extends React.Component {
                         <div className="text-center">
                             <img src={require('../assets/loading.svg')} alt="loading" className="loading__read-more-image"/>
                         </div>
-                    ) :
-                    ( <button className="button button__read-more" onClick={this.handleClick}>See more</button> ) 
+                    ) : comment ? ( <button className="button button__action-comment" onClick={this.handleClick}>Show previous comment</button> )
+                    : ( <button className="button button__read-more" onClick={this.handleClick}>See more</button> ) 
                 }
             </div>
         )        
