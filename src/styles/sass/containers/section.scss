@@ -5,8 +5,9 @@ section {
             display: flex;
             flex-direction: row;
             vertical-align: middle;
+            margin-bottom: 25px;
+            align-items: center;
             h2 {
-                margin-bottom: 25px;
                 flex: 1;
             }
         }
