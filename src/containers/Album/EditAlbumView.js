@@ -25,14 +25,8 @@ const UPDATE_ALBUM = gql `
 class EditAlbumView extends Component {
     constructor() {
         super()
-        this.state = {
-            albumId: null,
-        }
         this.handleChangeTitle.bind(this)
         this.input = {}
-    }
-    componentDidMount() {
-        this.setState({albumId: this.props.match.params.id})
     }
     handleChangeTitle = (e, prev) => {
         return Object.assign({}, prev, {
@@ -43,7 +37,7 @@ class EditAlbumView extends Component {
         });
     }
     render() {
-        const id = this.state.albumId
+        const id = this.props.match.params.id
         return (
             <View smallContainer>
                 <section>

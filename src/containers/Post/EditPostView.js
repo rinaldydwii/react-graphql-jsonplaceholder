@@ -26,15 +26,9 @@ const UPDATE_POST = gql `
 class EditPostView extends Component {
     constructor() {
         super()
-        this.state = {
-            postId: null,
-        }
         this.handleChangeTitle.bind(this)
         this.handleChangeBody.bind(this)
         this.input = {}
-    }
-    componentDidMount() {
-        this.setState({postId: this.props.match.params.id})
     }
     handleChangeTitle = (e, prev) => {
         return Object.assign({}, prev, {
@@ -53,7 +47,7 @@ class EditPostView extends Component {
         });
     }
     render() {
-        const id = this.state.postId
+        const id = this.props.match.params.id
         return (
             <View smallContainer>
                 <section>

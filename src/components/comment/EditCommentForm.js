@@ -32,16 +32,10 @@ const UPDATE_COMMENT = gql `
 class EditCommentForm extends React.Component {
     constructor() {
         super()
-        this.state = {
-            commentId: null,
-        }
         this.handleChangeName.bind(this)
         this.handleChangeEmail.bind(this)
         this.handleChangeBody.bind(this)
         this.input = {}
-    }
-    componentDidMount() {
-        this.setState({commentId: this.props.id})
     }
     handleChangeName = (e, prev) => {
         return Object.assign({}, prev, {
@@ -68,7 +62,7 @@ class EditCommentForm extends React.Component {
         });
     }
     render() {
-        const id = this.state.commentId
+        const id = this.props.id
         return (
             <Query query={GET_COMMENT} variables={{id}}>
                 { ({loading, error, data: {comment}, updateQuery}) => (

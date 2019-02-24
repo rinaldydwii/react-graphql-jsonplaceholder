@@ -27,16 +27,10 @@ const UPDATE_PHOTO = gql `
 class EditPhotoView extends Component {
     constructor() {
         super()
-        this.state = {
-            photoId: null,
-        }
         this.handleChangeTitle.bind(this)
         this.handleChangeUrl.bind(this)
         this.handleChangeThumbnailUrl.bind(this)
         this.input = {}
-    }
-    componentDidMount() {
-        this.setState({photoId: this.props.match.params.id})
     }
     handleChangeTitle = (e, prev) => {
         return Object.assign({}, prev, {
@@ -63,7 +57,7 @@ class EditPhotoView extends Component {
         });
     }
     render() {
-        const id = this.state.photoId
+        const id = this.props.match.params.id
         return (
             <View smallContainer>
                 <section>
