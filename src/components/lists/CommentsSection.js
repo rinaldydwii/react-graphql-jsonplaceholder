@@ -2,7 +2,7 @@ import React from "react";
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import CommentItem from "../items/CommentItem";
-import CommentForm from "../CommentForm";
+import CommentForm from "../comment/CommentForm";
 import Loading from "../Loading";
 import Container from "../Container";
 
@@ -11,6 +11,7 @@ const GET_POST_COMMENTS = gql`
         comments: postComments(id: $id) {
             id
             name
+            email
             body
         }
     }
@@ -18,7 +19,9 @@ const GET_POST_COMMENTS = gql`
 
 const CommentsSection = ({id}) => (
     <section>
-        <h2 className="text-center">Comments</h2>
+        <div className="section__title">
+            <h2 className="text-center">Comments</h2>
+        </div>
         <Query query={GET_POST_COMMENTS} variables={{id}}>
             { ({loading, error, data: {comments}, updateQuery}) => {
                 return (
@@ -26,8 +29,8 @@ const CommentsSection = ({id}) => (
                         <Container small>
                             { comments ? (
                                 <div className="list">
-                                    { comments.reverse().map(comment => (
-                                            <CommentItem comment={comment} key={comment.id} />
+                                    { comments.reverse().map((comment, index) => (
+                                            <CommentItem comment={comment} key={comment.id} updateQuery={updateQuery} index={index} />
                                         ))
                                     }
                                 </div>
