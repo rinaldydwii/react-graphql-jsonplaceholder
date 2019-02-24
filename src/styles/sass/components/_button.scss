@@ -39,6 +39,17 @@
         @include breakpoint(481px) {
             font-size: 12px;
         }
+        &-comment {
+            font-size: 8px;
+            padding: 0;
+            background: 0;
+            color: $black68;
+            border: none;
+            margin: 0 5px;
+            @include breakpoint(481px) {
+                font-size: 10px;
+            }
+        }
         &:hover {
             color: $black50;
             border-color: $black50;

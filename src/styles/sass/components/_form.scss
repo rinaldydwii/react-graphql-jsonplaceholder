@@ -47,4 +47,9 @@
             }
         }
     }
+    &__edit-comment {
+        .form__row {
+            padding: 5px 0;
+        }
+    }
 }
